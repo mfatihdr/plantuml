@@ -1,0 +1,14 @@
+{
+    "tasks": [
+        {
+            "label": "Run python script",
+            "type": "shell",
+            "command": "python testplant.py",
+        },
+        {
+            "label": "Delete generated files",
+            "type": "shell",
+            "command": "rm *.dot *.svg",
+        }
+    ]
+}
