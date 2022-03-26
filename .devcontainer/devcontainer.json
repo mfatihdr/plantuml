@@ -1,0 +1,13 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.224.3/containers/docker-existing-dockerfile
+{
+	"name": "5gtracer-python",
+	"remoteUser": "root",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"shutdownAction": "stopContainer",
+	"settings": {},
+	"extensions": [],
+	"postAttachCommand": "pip install -r req.txt; cp .devcontainer/*.pcap .;"
+}
