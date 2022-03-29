@@ -14,7 +14,8 @@
 		"ms-python.python",
 		"tht13.python",
 		"KevinRose.vsc-python-indent",
-		"cssho.vscode-svgviewer"
+		"cssho.vscode-svgviewer",
+		"donjayamanne.githistory"
 	],
 	"postAttachCommand": "pip install -r req.txt; cp .devcontainer/*.pcap .;"
 }

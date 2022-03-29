@@ -1,0 +1,16 @@
+{
+    "pcap": "assets/pcaps/merged_140600.pcap",
+    "decodes":{
+      "tcp.port==4000-9000":"http2"
+    },
+    "filters": "http2.header and frame.number > 12000",
+    "aliases":{ 
+      "10.10.33.68":"AMF",
+      "10.10.33.81":"NRF",
+      "10.10.33.69":"UDR",
+      "10.10.33.73":"AUSF",
+      "10.10.33.55":"UDM",
+      "10.10.33.80":"PCF",
+      "10.10.33.89":"SMF"
+    }
+  }
