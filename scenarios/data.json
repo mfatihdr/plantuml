@@ -1,5 +1,5 @@
 {
-  "pcap": "STOAMF1Pcap17001.pcap",
+  "pcap": "assets/pcaps/STOAMF1Pcap17001.pcap",
   "decodes":{
     "tcp.port==8001":"http2",
     "tcp.port==8005":"http2",

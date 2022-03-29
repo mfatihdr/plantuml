@@ -49,18 +49,18 @@ class cap:
 
 if __name__ == "__main__":
     
-    jsonConfig = json.load(open(sys.argv[1])) 
+    if len(sys.argv) >1:
+        jsonConfig = json.load(open(sys.argv[1])) 
+    else:
+        jsonConfig = json.load(open("scenarios/data.json"))
 
-    CAP_FILENAME = jsonConfig["pcap"]
+    pcapFileName = jsonConfig["pcap"]
+    filters = jsonConfig["filters"]
+    decodes = jsonConfig["decodes"]
+    aliases = jsonConfig["aliases"]
+    capObj = cap(pcapFileName)
+
+    filteredData = capObj.check_communication(filters, decodes)
+
+    UMLGenerate.generateUML(capObj.filename, filteredData, aliases)
     
-    decodeAs = {}
-    for data in jsonConfig["decodes"]:
-        decodeAs[data] = jsonConfig["decodes"][data]
-                
-    dFilter = jsonConfig["filters"]
-    
-    aliases = []
-    for data in jsonConfig["aliases"]:
-        aliases.append([data,jsonConfig["aliases"][data]])
-            
-    UMLGenerate.generateUML(CAP_FILENAME,cap(CAP_FILENAME).check_communication(dFilter, decodeAs),aliases)

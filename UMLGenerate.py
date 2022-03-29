@@ -1,3 +1,4 @@
+from ast import alias
 from plantweb.render import render_file
 from os.path import exists
 import base64
@@ -16,7 +17,8 @@ def generateUML(CAPfilename,paks, aliases):
         return decodeUML(svgName)
 
     for pak in paks:
-        for ip, alias in aliases:
+        for ip, alias  in aliases.items():
+
             if ip == pak[1]:
                 src = alias
             if ip == pak[2]:
