@@ -21,10 +21,10 @@ def generateUML(CAPfilename,paks, aliases):
                 src = alias
             if ip == pak[2]:
                 dst = alias
-        if pak[3] == "200 OK" or pak[3] == "201 Created":
-            CONTENT+= "autonumber "+pak[0] +' "<font color=green><b>Message 0  "\n'
+        if pak[3].isnumeric():
+            CONTENT += "autonumber "+pak[0] +' "<font color=green><b>Message 0  "\n'            
         else:
-            CONTENT+= "autonumber "+pak[0] +'\n'
+            CONTENT += "autonumber "+pak[0] +'\n'
             
         CONTENT+= src + " -> " + dst + " : " + pak[3] + ' [[ link {1111} info]]' +'\n'
     

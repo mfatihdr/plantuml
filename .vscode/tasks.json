@@ -1,4 +1,5 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
             "label": "Run python script",
@@ -8,7 +9,11 @@
         {
             "label": "Delete generated files",
             "type": "shell",
-            "command": "rm *.dot *.svg",
+            "command": "rm -rf *.dot *.svg",
+            "presentation": {
+                "revealProblems": "onProblem",
+                "close": true
+            }
         }
     ]
 }

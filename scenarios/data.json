@@ -1,0 +1,16 @@
+{
+  "pcap": "STOAMF1Pcap17001.pcap",
+  "decodes":{
+    "tcp.port==8001":"http2",
+    "tcp.port==8005":"http2",
+    "tcp.port==8006":"http2",
+    "tcp.port==8007":"http2",
+    "tcp.port==8009":"http2",
+    "tcp.port==8010":"http2"
+  },
+  "filters": "(tcp.port == 53494 or tcp.port == 34784 or tcp.port == 40192 or tcp.port == 53498)",
+  "aliases":{ 
+    "10.10.33.84":"AMF",
+    "10.10.33.81":"NRF"
+  }
+}

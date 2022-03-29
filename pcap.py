@@ -1,6 +1,6 @@
 import sys
 import pyshark
-# import pandas as pd
+import UMLGenerate
 import json
 
 class cap:
@@ -16,18 +16,14 @@ class cap:
         for pak in self.cap:
             method = ""
             if hasattr(pak, "http2"):
-
                 if hasattr(pak.http2, "headers"):
+     
+                    if hasattr(pak.http2, "headers_status"):
+                        method = pak.http2.headers_status
 
                     if "GET" in pak.http2.header:
                         if "nf-instances" in str(pak.http2):
                             method = "GET"
-
-                    if "201" in pak.http2.header and "Created" in pak.http2.header:
-                        method = "201 Created"
-   
-                    if "200" in pak.http2.header and "OK" in pak.http2.header:
-                        method = "200 OK"
 
                     if "PATCH" in pak.http2.header:
                         #id = str(pak.http2).split("nf-instances/")[1].split("\n")[0]
@@ -41,17 +37,15 @@ class cap:
                         method = "POST"
 
                     if "DELETE" in pak.http2.header:
-                        method = "POST"
+                        method = "DELETE"
 
                     if method != "":
                         data.append([pak.frame_info.number,
-                                pak.ip.src+"_"+pak.tcp.srcport,
-                                pak.ip.dst+"_"+pak.tcp.dstport,
+                                pak.ip.src,
+                                pak.ip.dst,
                                 method,
                                 pak.http2.header])
-        return data
-        #return pd.DataFrame(data, columns=["frameID", "src", "dst", "Method", "Header"])
-        
+        return data        
 
 if __name__ == "__main__":
     
@@ -59,32 +53,14 @@ if __name__ == "__main__":
 
     CAP_FILENAME = jsonConfig["pcap"]
     
-    decodeAs = jsonConfig["decodes"]
-    
+    decodeAs = {}
+    for data in jsonConfig["decodes"]:
+        decodeAs[data] = jsonConfig["decodes"][data]
+                
     dFilter = jsonConfig["filters"]
-    #dFilter = ""
-
-    c = cap(CAP_FILENAME)
-
-    d = c.check_communication(dFilter, decodeAs)
     
-    print(d)
-   #////////////////////////////////////////////////////////////
-    # CAP_FILENAME = "pcap_files/STOAMF1Pcap17001.pcap"
-    
-    # decodeAs = {
-    #     'tcp.port==8001':'http2',
-    #     'tcp.port==8005':'http2',
-    #     'tcp.port==8006':'http2',
-    #     'tcp.port==8007':'http2',
-    #     'tcp.port==8009':'http2',
-    #     'tcp.port==8010':'http2'
-    # }
-    
-    # dFilter = "tcp.port == 53494 or tcp.port == 34784 or tcp.port == 40192 or tcp.port == 53498"
-    # #dFilter = ""
-
-    # c = cap(CAP_FILENAME)
-
-    # d = c.check_communication(dFilter, decodeAs)
-   #////////////////////////////////////////////////////////////
+    aliases = []
+    for data in jsonConfig["aliases"]:
+        aliases.append([data,jsonConfig["aliases"][data]])
+            
+    UMLGenerate.generateUML(CAP_FILENAME,cap(CAP_FILENAME).check_communication(dFilter, decodeAs),aliases)
