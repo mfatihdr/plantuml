@@ -1,5 +1,7 @@
+import sys
 import pyshark
-import pandas as pd
+# import pandas as pd
+import json
 
 class cap:
     def __init__(self, filename):
@@ -52,20 +54,37 @@ class cap:
         
 
 if __name__ == "__main__":
-    CAP_FILENAME = "pcap_files/STOAMF1Pcap17001.pcap"
     
-    decodeAs = {
-        'tcp.port==8001':'http2',
-        'tcp.port==8005':'http2',
-        'tcp.port==8006':'http2',
-        'tcp.port==8007':'http2',
-        'tcp.port==8009':'http2',
-        'tcp.port==8010':'http2'
-    }
+    jsonConfig = json.load(open(sys.argv[1])) 
+
+    CAP_FILENAME = jsonConfig["pcap"]
     
-    dFilter = "tcp.port == 53494 or tcp.port == 34784 or tcp.port == 40192 or tcp.port == 53498"
+    decodeAs = jsonConfig["decodes"]
+    
+    dFilter = jsonConfig["filters"]
     #dFilter = ""
 
     c = cap(CAP_FILENAME)
 
     d = c.check_communication(dFilter, decodeAs)
+    
+    print(d)
+   #////////////////////////////////////////////////////////////
+    # CAP_FILENAME = "pcap_files/STOAMF1Pcap17001.pcap"
+    
+    # decodeAs = {
+    #     'tcp.port==8001':'http2',
+    #     'tcp.port==8005':'http2',
+    #     'tcp.port==8006':'http2',
+    #     'tcp.port==8007':'http2',
+    #     'tcp.port==8009':'http2',
+    #     'tcp.port==8010':'http2'
+    # }
+    
+    # dFilter = "tcp.port == 53494 or tcp.port == 34784 or tcp.port == 40192 or tcp.port == 53498"
+    # #dFilter = ""
+
+    # c = cap(CAP_FILENAME)
+
+    # d = c.check_communication(dFilter, decodeAs)
+   #////////////////////////////////////////////////////////////
