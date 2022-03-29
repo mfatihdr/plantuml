@@ -30,7 +30,7 @@ class cap:
                         method = "200 OK"
 
                     if "PATCH" in pak.http2.header:
-                        id = str(pak.http2).split("nf-instances/")[1].split("\n")[0]
+                        #id = str(pak.http2).split("nf-instances/")[1].split("\n")[0]
                         method = "PATCH"
 
                     if "PUT" in pak.http2.header:
