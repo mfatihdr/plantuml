@@ -8,11 +8,11 @@ def decodeUML(svgLoc):
     return 'data:image/svg+xml;base64,{}'.format(encoded.decode()) 
 
 
-def generateUML(CAPfilename,paks, aliases):
+def generateUML(CAPfilename, outputFileName, paks, aliases):
     CONTENT = ""
     #for alias in aliases:
 
-    svgName = CAPfilename.split(".")[0] +".svg"
+    svgName = outputFileName.split(".")[0] +".svg"
     if exists(svgName): # check if output exist, won't generate new one
         return decodeUML(svgName)
 
@@ -30,7 +30,7 @@ def generateUML(CAPfilename,paks, aliases):
             
         CONTENT+= src + " -> " + dst + " : " + pak[3] + ' [[ link {1111} info]]' +'\n'
     
-    infile = CAPfilename.split(".")[0] + '.dot'
+    infile = outputFileName.split(".")[0] + '.dot'
     with open(infile, 'wb') as fd:
         fd.write(CONTENT.encode('utf-8'))
 

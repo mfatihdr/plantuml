@@ -42,6 +42,7 @@ if __name__ == "__main__":
         jsonConfig = json.load(open("scenarios/pdu_session_kurulumu.json"))
 
     pcapFileName = jsonConfig["pcap"]
+    outputFileName = jsonConfig["outputfile"]
     filters = jsonConfig["filters"]
     decodes = jsonConfig["decodes"]
     aliases = jsonConfig["aliases"]
@@ -49,5 +50,5 @@ if __name__ == "__main__":
 
     filteredData = capObj.check_communication(filters, decodes)
 
-    UMLGenerate.generateUML(capObj.filename, filteredData, aliases)
+    UMLGenerate.generateUML(capObj.filename, outputFileName, filteredData, aliases)
     

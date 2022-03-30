@@ -1,5 +1,6 @@
 {
     "pcap": "assets/pcaps/merged_140600.pcap",
+    "outputfile": "assets/outputs/merged_140600",
     "decodes":{
       "tcp.port==4000-9000":"http2"
     },

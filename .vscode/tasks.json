@@ -4,12 +4,12 @@
         {
             "label": "Run python script",
             "type": "shell",
-            "command": "python testplant.py",
+            "command": "python pcap.py scenarios/pdu_session_kurulumu.json",
         },
         {
             "label": "Delete generated files",
             "type": "shell",
-            "command": "rm -rf *.dot *.svg",
+            "command": "rm -fv /workspaces/plantuml/assets/outputs/*.dot /workspaces/plantuml/assets/outputs/*.svg",
             "presentation": {
                 "revealProblems": "onProblem",
                 "close": true
